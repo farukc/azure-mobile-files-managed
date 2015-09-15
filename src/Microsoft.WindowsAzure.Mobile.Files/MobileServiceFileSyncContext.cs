@@ -77,11 +77,11 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
             }
         }
 
-        internal void NotifyFileOperationCompletion(MobileServiceFile file, FileOperationKind fileOperationKind, FileOperationSource source)
+        internal async Task NotifyFileOperationCompletion(MobileServiceFile file, FileOperationKind fileOperationKind, FileOperationSource source)
         {
             var operationCompletedEvent = new FileOperationCompletedEvent(file, fileOperationKind, source);
 
-            this.eventManager.Publish(operationCompletedEvent);
+            await this.eventManager.PublishAsync(operationCompletedEvent);
         }
 
         public async Task AddFileAsync(MobileServiceFile file)
