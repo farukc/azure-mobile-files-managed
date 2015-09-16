@@ -64,12 +64,16 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
         {
             switch (storeOperationEvent.Operation.Kind)
             {
-                case StoreOperationKind.Insert:
-                case StoreOperationKind.Update:
-                case StoreOperationKind.Upsert:
-                    PullFilesAsync(storeOperationEvent.Operation.TableName, storeOperationEvent.Operation.RecordId);
+                case LocalStoreOperationKind.Insert:
+                case LocalStoreOperationKind.Update:
+                case LocalStoreOperationKind.Upsert:
+                    if (storeOperationEvent.Operation.Source == StoreOperationSource.ServerPull 
+                        || storeOperationEvent.Operation.Source == StoreOperationSource.ServerPush)
+                    {
+                        PullFilesAsync(storeOperationEvent.Operation.TableName, storeOperationEvent.Operation.RecordId);
+                    }
                     break;
-                case StoreOperationKind.Delete:
+                case LocalStoreOperationKind.Delete:
                     this.metadataStore.PurgeAsync(storeOperationEvent.Operation.TableName, storeOperationEvent.Operation.RecordId);
                     break;
                 default:
