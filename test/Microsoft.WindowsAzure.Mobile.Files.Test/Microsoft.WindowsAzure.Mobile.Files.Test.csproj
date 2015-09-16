@@ -66,7 +66,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTests\Operations\FileOperationQueue.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Microsoft.WindowsAzure.Mobile.Files\Microsoft.WindowsAzure.Mobile.Files.csproj">
@@ -80,6 +79,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <Fakes Include="Fakes\Microsoft.WindowsAzure.Mobile.fakes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UnitTests\Operations\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
